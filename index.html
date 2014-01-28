@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Vollkorn' rel='stylesheet' type='text/css'>
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
@@ -15,15 +16,25 @@
     <script src="idiom.js"></script>
     <style type="text/css">
     body {
-      padding-top: 20px;
+        font-family: 'Vollkorn', serif;
+        padding-top: 20px;
+    }
+    h1 {
+        font-family: 'Vollkorn', serif;
     }
     .jumbotron {
-      text-align: center;
-      background-color: transparent;
+        text-align: center;
+        background-color: transparent;
     }
     .jumbotron .btn {
-      font-size: 21px;
-      padding: 14px 24px;
+        font-size: 21px;
+        padding: 14px 24px;
+    }
+    .well {
+        font-size: 20px;
+    }
+    #result {
+        padding: 0 80px;
     }
     </style>
 </head>
@@ -33,6 +44,7 @@
         <div class="jumbotron">
             <h1>iDIOM</h1>
             <p class="lead">Make use of big data to improve your English writing.</p>
+            <br/>
             <div class="input-group input-group-lg">
                 <span class="input-group-addon">
                     <span class="glyphicon glyphicon-pencil"></span>
@@ -42,8 +54,8 @@
                        ng-model="queryText" size="30">
             </div>
         </div>
-        <div style="padding: 50px">
-                <span class="badge pull-right">{{count}}</span>
+        <div id="result">
+            <h1>{{count}}</h1>
             <div class="well well-sm" ng-repeat="example in examples">
                 {{example.content}}
             </div>

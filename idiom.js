@@ -27,7 +27,7 @@ function FetchCtrl($scope, $http, $timeout) {
         $http.jsonp(url, {
             params: params
         }).then(function (response) {
-            $scope.count = response.data.responseData.cursor.estimatedResultCount;
+            $scope.count = "About " + response.data.responseData.cursor.estimatedResultCount + " results";
             $scope.examples = response.data.responseData.results;
         });
     };
