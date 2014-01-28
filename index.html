@@ -1,58 +1,53 @@
-<!doctype html>
+<!DOCTYPE html>
 <html ng-app>
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>Idiom</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.min.js"></script>
-    <script type="text/javascript">
-        function FetchCtrl($scope, $http, $timeout) {
-
-            // delay call
-            var timer = false;
-            var delay = 1000;
-            $scope.$watch('queryText', function () {
-                if (timer) {
-                    $timeout.cancel(timer)
-                }
-                timer = $timeout(function () {
-                    if ($scope.queryText && $scope.queryText.length) {
-                        $scope.search();
-                    }
-                }, delay)
-            });
-
-            // search
-            $scope.search = function () {
-                var url = "http://ajax.googleapis.com/ajax/services/search/web";
-                var params = {
-                    "v": "1.0",
-                    "callback": "JSON_CALLBACK",
-                    "rsz": 8,
-                    "hl": "en",
-                    "q": '"' + $scope.queryText + '"'
-                }
-                $http.jsonp(url, {
-                    params: params
-                }).then(function (response) {
-                    $scope.count = response.data.responseData.cursor.estimatedResultCount;
-                    $scope.examples = response.data.responseData.results;
-                });
-            };
-        }
-    </script>
+    <script src="idiom.js"></script>
+    <style type="text/css">
+    body {
+      padding-top: 20px;
+    }
+    .jumbotron {
+      text-align: center;
+      background-color: transparent;
+    }
+    .jumbotron .btn {
+      font-size: 21px;
+      padding: 14px 24px;
+    }
+    </style>
 </head>
 
 <body>
-    <div ng-controller="FetchCtrl">
-        <input type="text" ng-model="queryText" size="30" placeholder="write your sentence here">
-        <pre>count: {{count}}</pre>
-        <ul>
-            <li ng-repeat="example in examples">
+    <div class="container" ng-controller="FetchCtrl">
+        <div class="jumbotron">
+            <h1>iDIOM</h1>
+            <p class="lead">Make use of big data to improve your English writing.</p>
+            <div class="input-group input-group-lg">
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </span>
+                <input type="text" class="form-control" required="" autofocus=""
+                       placeholder="write your sentence here"
+                       ng-model="queryText" size="30">
+            </div>
+        </div>
+        <div style="padding: 50px">
+                <span class="badge pull-right">{{count}}</span>
+            <div class="well well-sm" ng-repeat="example in examples">
                 {{example.content}}
-            </li>
-        </ul>
+            </div>
+        </div>
     </div>
 </body>
 
