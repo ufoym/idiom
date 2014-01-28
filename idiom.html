@@ -1,0 +1,37 @@
+<!doctype html>
+<html ng-app>
+  <head>
+    <script src="http://code.angularjs.org/1.2.10/angular.min.js"></script>
+    <script type="text/javascript">
+    function FetchCtrl($scope, $http){
+      $scope.search = function(){
+        var url = "http://ajax.googleapis.com/ajax/services/search/web";
+        var params = {
+          "v": "1.0",
+          "callback": "JSON_CALLBACK",
+          "q": '"' + $scope.queryText + '"'
+        }
+        $http.jsonp(url, {params: params}).then(function(response) {
+          $scope.count = response.data.responseData.cursor.estimatedResultCount;
+          $scope.examples = response.data.responseData.results;
+        });
+      };
+    }
+    </script>
+  </head>
+  <body>
+    <div ng-controller="FetchCtrl">
+      <form ng-submit="search()">
+        <input type="text" ng-model="queryText"  size="30"
+               placeholder="write your sentence here">
+        <input class="btn-primary" type="submit" value="evaluate">
+      </form>
+      <pre>count: {{count}}</pre>
+      <ul>
+        <li ng-repeat="example in examples">
+          {{example.content}}
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>
