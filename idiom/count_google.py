@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import requests
 
-class GoogleCounter(object):
+class GoogleSearcher(object):
     """ google result counter """
 
     # -------------------------------------------------------------------------
@@ -11,40 +11,48 @@ class GoogleCounter(object):
     search_ver = '1.0'
 
     def __init__(self):
-        super(GoogleCounter, self).__init__()
+        super(GoogleSearcher, self).__init__()
 
     # -------------------------------------------------------------------------
     # core
     # -------------------------------------------------------------------------
-    def count(self, query):
-        """ Get the number of results from Google when searching a query
-            sentence. The result count is roughly estimated. Thus it is not
-            necessary accurate.
+    def search(self, query):
+        """ Search a sentence / phrase by Google and get the number of results
+            as well as a few matching examples. Since the result count is
+            roughly estimated, it is not necessary accurate.
 
             Parameters
             ----------
             query : string
-                The query sentence.
+                The query sentence / phrase.
 
             Returns
             -------
-            result count : int
-                If everything goes well, return the result count; Otherwise,
-                return -1.
+            count : int
+                The result count. It is negative if any exception occurs when
+                parsing the search result, and non-negative otherwise.
+            examples : list
+                List of a few examples matching the query sentence / phrase.
         """
-        count = -1
+        count, examples = -1, []
         payload = {'v': self.search_ver, 'q': '"%s"' % query}
         r = requests.get(self.search_url, params=payload)
         try:
             r_json = r.json()
-            count = r_json['responseData']['cursor']['estimatedResultCount']
+            data = r_json['responseData']
+            count = data['cursor']['estimatedResultCount']
+            examples = [item['content'] for item in data['results'] \
+                        if query.lower() in item['content'].lower()]
         except:
             pass
-        return count
+        return count, examples
 
 # -----------------------------------------------------------------------------
 
 if __name__ == '__main__':
-    google_counter = GoogleCounter()
-    count = google_counter.count('on my way home')
+    google_searcher = GoogleSearcher()
+    count, examples = google_searcher.search('It should be noted that')
     print count
+    for example in examples:
+        print '----------------------------'
+        print example
