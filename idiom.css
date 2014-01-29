@@ -1,0 +1,22 @@
+
+body {
+    font-family: 'Vollkorn', serif;
+    padding-top: 20px;
+}
+h1 {
+    font-family: 'Vollkorn', serif;
+}
+.jumbotron {
+    text-align: center;
+    background-color: transparent;
+}
+.jumbotron .btn {
+    font-size: 21px;
+    padding: 14px 24px;
+}
+.well {
+    font-size: 20px;
+}
+#result {
+    padding: 0 80px;
+}

@@ -1,4 +1,4 @@
-function FetchCtrl($scope, $http, $timeout) {
+function FetchCtrl($scope, $http, $timeout, $sce) {
 
     // delay call
     var timer = false;
@@ -28,13 +28,18 @@ function FetchCtrl($scope, $http, $timeout) {
             params: params
         }).then(function (response) {
             var count = response.data.responseData.cursor.estimatedResultCount;
+            var items = response.data.responseData.results;
             if (count > 0) {
                 $scope.idiomaticity = Math.log(count) / Math.LN10 * 10;
             }
             else {
                 $scope.idiomaticity = 0;
             }
-            $scope.examples = response.data.responseData.results;
+
+            $scope.examples = [];
+            angular.forEach(items, function(item) {
+                $scope.examples.push($sce.trustAsHtml(item.content));
+            });
         });
     };
 }
