@@ -48,9 +48,15 @@
             <input type="text" class="form-control input-lg" required="" autofocus=""
                    placeholder="write your sentence here"
                    ng-model="queryText" size="30">
+            <div class="progress progress-striped">
+                <div class="progress-bar progress-bar-success" role="progressbar"
+                aria-valuenow="{{idiomaticity}}" aria-valuemin="0" aria-valuemax="10"
+                style="width: {{idiomaticity}}%">
+                    <span class="sr-only">Idiomaticity: {{idiomaticity}}</span>
+                </div>
+            </div>
         </div>
         <div id="result">
-            <h1>{{count}}</h1>
             <div class="well well-sm" ng-repeat="example in examples">
                 {{example.content}}
             </div>

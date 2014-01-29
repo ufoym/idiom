@@ -29,10 +29,10 @@ function FetchCtrl($scope, $http, $timeout) {
         }).then(function (response) {
             var count = response.data.responseData.cursor.estimatedResultCount;
             if (count > 0) {
-                $scope.count = "About " + count + " results";
+                $scope.idiomaticity = Math.log(count) / Math.LN10 * 10;
             }
             else {
-                $scope.count = "Ops...seems unidiomatic :-("
+                $scope.idiomaticity = 0;
             }
             $scope.examples = response.data.responseData.results;
         });
