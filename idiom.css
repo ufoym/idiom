@@ -15,6 +15,12 @@ h1 {
     padding: 14px 24px;
 }
 #result {
-    font-size: 20px;
     padding: 0 80px;
+}
+.content {
+    font-size: 20px;
+}
+.title {
+    font-size: 16px;
+    color: #999;
 }

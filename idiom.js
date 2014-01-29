@@ -40,7 +40,8 @@ function FetchCtrl($scope, $http, $timeout, $sce) {
             angular.forEach(items, function(item) {
                 $scope.examples.push({
                     content: $sce.trustAsHtml(item.content),
-                    title: $sce.trustAsHtml(item.title)
+                    title: $sce.trustAsHtml(item.title),
+                    url: item.unescapedUrl
                 });
             });
         });

@@ -36,8 +36,11 @@
         </div>
         <div id="result">
             <div class="panel panel-default" ng-repeat="example in examples">
-                <div class="panel-body" ng-bind-html="example.content"></div>
-                <div class="panel-footer" ng-bind-html="example.title"></div>
+                <div class="panel-body content" ng-bind-html="example.content"></div>
+                <div class="panel-footer">
+                    <a href="{{example.url}}" class="btn btn-primary btn-xs pull-right" >source</a>
+                    <span class="title" ng-bind-html="example.title"></span>
+                </div>
             </div>
         </div>
     </div>
