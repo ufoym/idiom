@@ -30,7 +30,7 @@ function FetchCtrl($scope, $http, $timeout, $sce) {
             var count = response.data.responseData.cursor.estimatedResultCount;
             var items = response.data.responseData.results;
             if (count > 0) {
-                $scope.idiomaticity = Math.log(count) / Math.LN10 * 10;
+                $scope.idiomaticity = (Math.log(count)/Math.LN10*10).toFixed(1);
             }
             else {
                 $scope.idiomaticity = 0;

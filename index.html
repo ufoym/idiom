@@ -30,11 +30,11 @@
                 <div class="progress-bar progress-bar-success" role="progressbar"
                 aria-valuenow="{{idiomaticity}}" aria-valuemin="0" aria-valuemax="10"
                 style="width: {{idiomaticity}}%">
-                    <span class="sr-only">Idiomaticity: {{idiomaticity}}</span>
+                    <span>Idiomaticity: {{idiomaticity}}</span>
                 </div>
             </div>
-            <div class="panel panel-default" ng-repeat="example in examples">
-                <div class="panel-body content" ng-bind-html="example"></div>
+            <div ng-repeat="example in examples">
+                <div class="example" ng-bind-html="example"></div>
             </div>
         </div>
     </div>
