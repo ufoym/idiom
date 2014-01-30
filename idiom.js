@@ -37,12 +37,14 @@ function FetchCtrl($scope, $http, $timeout, $sce) {
             }
 
             $scope.examples = [];
+            var query = $scope.queryText.toLowerCase()
             angular.forEach(items, function(item) {
-                $scope.examples.push({
-                    content: $sce.trustAsHtml(item.content),
-                    title: $sce.trustAsHtml(item.title),
-                    url: item.unescapedUrl
-                });
+                if (item.content.toLowerCase().indexOf(query) >= 0) {
+                    $scope.examples.push($sce.trustAsHtml(item.content));
+                }
+                else if (item.title.toLowerCase().indexOf(query) >= 0) {
+                    $scope.examples.push($sce.trustAsHtml(item.title));
+                }
             });
         });
     };
