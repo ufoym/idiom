@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Vollkorn' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Dr+Sugiyama' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="idiom.css">
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -20,9 +21,10 @@
 <body>
     <div class="container" ng-controller="FetchCtrl">
         <div class="jumbotron">
-            <h1>iDIOM</h1>
+            <h1>idiom</h1>
             <p class="lead">Make use of big data to improve your English writing.</p>
-            <br/>
+        </div>
+        <div>
             <input type="text" class="form-control input-lg" required="" autofocus=""
                    placeholder="write your sentence here"
                    ng-model="queryText" size="30">
@@ -33,8 +35,8 @@
                     <span>Idiomaticity: {{idiomaticity}}</span>
                 </div>
             </div>
-            <div ng-repeat="example in examples">
-                <div class="example" ng-bind-html="example"></div>
+            <div class="example" ng-repeat="example in examples">
+                <div ng-bind-html="example"></div>
             </div>
         </div>
     </div>
