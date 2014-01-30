@@ -24,6 +24,7 @@ function FetchCtrl($scope, $http, $timeout, $sce) {
             "hl": "en",
             "q": '"' + $scope.queryText + '"'
         }
+        $scope.idiomaticity = 0;
         $http.jsonp(url, {
             params: params
         }).then(function (response) {
